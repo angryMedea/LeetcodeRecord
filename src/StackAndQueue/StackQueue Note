@@ -1,0 +1,44 @@
+## 栈与队列
+1. 栈
+- 栈不是一个接口，而是一个类，继承自Vector。因为设计得早，没有遵循接口分离的原则，因此更推荐使用Deque接口来实现
+- Deque接口是Queue的子接口，表示双端队列，允许在两端操作元素，既可以FIFO，也可以LIFO
+e.g. Deque<Integer> stack = new ArrayDeque<>();
+     Deque<Integer> stack = new LinkedList<>();
+2. 栈相关的方法
+- push()
+- pop()
+- peek()
+- isEmpty()
+
+3. 队列
+- 队列是一个接口，继承自Collection，常用以下三种实现类：
+    - LinkedList：双向链表
+    - PriorityQueue：优先队列，元素根据自然顺序或比较器来排序，而不是按照插入顺序
+    - ArrayDeque：基于数组的双端队列，可以用作栈和队列，效率很高
+4. 队列相关的方法
+- offer()
+- poll()
+- peek()
+- isEmpty()
+5. 如果用双端队列，还有以下方法用来在队尾操作
+- peekLast()
+- pollLast()
+- addLast()
+
+4. 优先队列：最大堆/最小堆
+- 在定义PriorityQueue时要注意是对什么元素进行比较，e.g 是对元素本身进行比较 还是 元素出现的次数？
+- PriorityQueue默认为最小堆，按照元素的自然顺序排列，如果不是比较元素本身，需要自定义比较器
+Queue<Int> pq = new PriorityQueue<>();// 默认按元素的自然顺序排列，从小到大，最小堆
+Queue<Int> pq = new PriorityQueue<>((v1,v2) -> v1 - v2);// 这就是自然排序，从小到大，不用写
+Queue<Int> pq = new PriorityQueue<>((v1,v2) -> v2 - v1);// 这是反过来，从大到小定义最大堆，必须要重写比较器
+Queue<Int> pq = new PriorityQueue<>((v1,v2) -> map.get(v1) - map.get(v2);// 这是自定义比较方法，必须重写
+
+- 比较器的逻辑
+负数返回值：表示第一个参数优先级更高
+0返回值：两个参数优先级相同
+正数返回值：表示第二个参数优先级更高
+e.g. v1 - v2 < 0, v1更小优先级更高
+     v2 - v1 < 0, v1更大优先级更高
+
+
+

@@ -1,0 +1,66 @@
+20230213
+------------------二分法解题笔记----------------------
+
+1.【搜索区间问题】
+先搞清楚区间的开闭情况，这是一个不变量，在while搜索时要坚持这个变量
+    一般是[left,right]和[left,right)，即左闭右闭和左闭右开
+
+>[left,right]
+left = 0;
+right = array.length - 1;//right要取到，所以要-1
+while(left <= right){ //left可以等于right，此时相当于[1,1]，这个区间内只有一个元素，但是是合法 的
+    mid = (left + right)/2 //注意溢出
+    if(array[mid] > target){
+        right = mid - 1;//因为array[mid]明确大于target了，此时区间内不必再包含mid
+    }else if(array[mid] < target){
+        left = mid + 1;//同理，array[mid]明确小于target了，此时区间内不必再包含mid
+    }else{
+        return mid;
+    }
+}
+    return -1;
+}
+
+>[left,right)
+left = 0;
+right = array.length;//区间取不到right，直接为length
+while(left < right){ //left不可以等于right，此时相当于[1,1)，不合法区间
+    mid = (left + right)/2 //注意溢出
+    if(array[mid] > target){
+        right = mid;//因为区间取不到right，当right = mid时，此时区间不包含mid
+    }else if(array[mid] < target){
+        left = mid + 1;//因为区间取得到left，array[mid]明确小于target了，当left = mid + 1时，此时区间不包含mid
+    }else{
+        return mid;
+    }
+}
+    return -1;
+}
+
+2.【取中位数问题】
+>mid = (right + left)/2
+通常情况下，数组下标都是int类型，当下标很大时，左右边界下标相加可能出现溢出的现象，导致最后的结果为负数
+>mid = left + (right - left)/2
+虽然在right很大，left为负数的情况下，还是可能出现溢出，但是一般下标不会为负数，此种写法适合绝大多数题解
+>mid = (right + left) >>> 1 (注意写成 >>1会int溢出，因为超过了最大值就会变负数)
+Java内部JDK写法，无符号右移一位，左边补0，不补符号位，就算是负数也会变成正数，是运算速度最快的写法
+
+3.【二段性问题】
+3.1当元素不具备整体单调递增，而是在各自区间内单调递增时，需要求区间的分界点（lc33）
+#1.求区间内，满足条件的第一个mid
+因为区间单调递增，所以此时的mid肯定是区间内的左边界值，mid必须向偏小值取整
+mid = (left + right) >>> 1
+if(nums[mid] >= target) r = 
+
+>【一些tricky的问题】
+#1.什么时候 mid=l+r>>1，什么时候 mid=l+r+1>>1?
+#2.什么时候用 nums[mid] >= target，什么时候用 nums[mid] <= target?
+
+>【答案】这两个问题其实是一个问题，即：mid什么时候向上取整，什么时候向下取整？
+(在Java中，整数除法的结果是一个整数，即只保留除法的整数部分，舍去小数部分。例如，7/2的结果是3，而不是3.5)
+#1.  mid=l+r>>1 向偏小值取整 找到满足条件的第一个mid
+搭配  nums[mid] >= target
+此时，else的选择是 l = mid + 1，当区间不断缩小，nums[mid]一直<target时，不会陷入死循环
+#2. mid=l+r+1>>1 向偏大值取整 找到满足条件的最后一个mid
+搭配  nums[mid] <= target
+此时，else的选择是 r = mid - 1，当区间不断缩小，nums[mid]一直>target时，不会陷入死循环
