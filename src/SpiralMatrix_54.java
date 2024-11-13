@@ -15,6 +15,8 @@ public class SpiralMatrix_54 {
         List<Integer> res = new ArrayList<>();
         int l = 0, r = m - 1, t = 0, b = n - 1;
         int start = 1, end = m * n;
+        // 也可以用res的大小来作为循环条件
+//        while(res.size() <= m * n)
         while(start <= end){
             for(int i = l; i <= r;i++){
                 res.add(matrix[t][i]);
@@ -30,6 +32,8 @@ public class SpiralMatrix_54 {
             // 1. 中间剩2个数：此时最上层遍历完 t++，t > b，退出循环
             // 2. 中间剩1个数：此时最右层遍历完 r--，l > r，退出循环
             // 如果不及时退出，就会导致重复遍历
+            // 如果用res的size作为循环条件，这里就变成
+            // if (res.length === size) break
             if(t > b || l > r) break;
             for(int i = r; i >= l;i--){
                 res.add(matrix[b][i]);
