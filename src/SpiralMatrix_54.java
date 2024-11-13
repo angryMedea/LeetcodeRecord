@@ -26,6 +26,10 @@ public class SpiralMatrix_54 {
                 start++;
             }
             r--;
+            // 遍历到最里层的时候只有两种情况：
+            // 1. 中间剩2个数：此时最上层遍历完 t++，t > b，退出循环
+            // 2. 中间剩1个数：此时最右层遍历完 r--，l > r，退出循环
+            // 如果不及时退出，就会导致重复遍历
             if(t > b || l > r) break;
             for(int i = r; i >= l;i--){
                 res.add(matrix[b][i]);
