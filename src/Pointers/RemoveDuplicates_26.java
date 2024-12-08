@@ -31,4 +31,17 @@ public class RemoveDuplicates_26 {
         }
         return j+1;
     }
+
+    public static int solution2(int[] nums){
+        int len = nums.length;
+        int i = 0;
+        int j = 1;
+        while(j < len){
+            if(nums[j] != nums[i]){
+                nums[++i] = nums[j];
+            }
+            j++;
+        }
+        return i+1;
+    }
 }

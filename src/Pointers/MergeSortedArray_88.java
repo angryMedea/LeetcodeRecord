@@ -63,4 +63,22 @@ public class MergeSortedArray_88 {
         }
         return nums1;
     }
+
+    // 以nums2指针作为主循环条件，当指针指向负数时，nums1的指针直接不变保持在原地就行
+    // 因为这意味着剩下的元素就是nums1本身的原始数据，且它们已经在原地，无需移动
+    public static int[] merge3(int[] nums1, int m, int[] nums2, int n){
+        int k = m + n - 1;
+        int j = m - 1;
+        int l = n - 1;
+        //when l<0,no need to deal with j
+        //because nums1 has been ordered
+        while(l >= 0){
+            if(j >= 0 && nums1[j] > nums2[l]){
+                nums1[k--] = nums1[j--];
+            }else{// when j < 0 or nums1[j] <= nums[l]
+                nums1[k--] = nums2[l--];
+            }
+        }
+        return nums1;
+    }
 }

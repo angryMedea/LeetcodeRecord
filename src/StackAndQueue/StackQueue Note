@@ -40,5 +40,28 @@ Queue<Int> pq = new PriorityQueue<>((v1,v2) -> map.get(v1) - map.get(v2);// 这�
 e.g. v1 - v2 < 0, v1更小优先级更高
      v2 - v1 < 0, v1更大优先级更高
 
+2. 给一个例子就好，high level一点
+3. one to many/ many to one/ entity bean/ table 解释一下
+5. 从UI到后端开始说
+
+1. 选一个post的，稍微复杂一点，ui -> api -> request body ->jpa
+2. 要提一下http error怎么处理，negative要说，不一样怎么处理
+3. 说清楚filterChain是干什么的
+4. 建了哪些class， flow是什么，怎么生成的，什么时候去verify token
+5. 两个就行
+6. 3个就行
+7. 首先说pom.xml, dependency和plugins各说一个
+8. 有什么区别？
+9. 举一个component的例子，state/effect
+10.
+11. function和class举个例子
+12. props要举个例子
+13.
+14. route怎么传进去怎么出来
+16. 怎么hook
+22. type's track 自动转型
+
+1. 先描述场景
+
 
 

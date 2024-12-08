@@ -10,7 +10,6 @@ public class TwoSum2_167 {
         System.out.println(Arrays.toString(ints));
     }
 
-
         public int[] twoSum(int[] nums, int target) {
             int l = 0;
             int r = nums.length - 1;
